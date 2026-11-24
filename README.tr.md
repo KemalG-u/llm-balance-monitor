@@ -38,7 +38,7 @@ Durum dosyası `./data/balance-state.json` yoluna yazılır (`LLM_MONITOR_DATA_D
 | `LLM_MONITOR_DATA_DIR` | `balance-state.json` klasörü (varsayılan `./data`). |
 | `MOONSHOT_BASE_URL` | Varsayılan `https://api.moonshot.ai` (uluslararası, USD). Çin platformu için `https://api.moonshot.cn` (CNY). İki platformun anahtarları farklıdır. |
 
-Eşikler `lib.ts` içindeki `THRESHOLDS` değerindedir: DeepSeek ve Moonshot 3 USD altında uyarı, 1 USD altında kritik; OpenRouter 5 USD altında uyarı, 1 USD altında kritik.
+Eşikler `lib.ts` içindeki `THRESHOLDS` değerindedir: DeepSeek ve Moonshot 3 USD altında uyarı, 1 USD altında kritik; OpenRouter 5 USD altında uyarı, 1 USD altında kritik. Başka para birimindeki bakiye (ör. Çin Moonshot platformunda CNY) bu USD eşikleriyle karşılaştırılmaz; izleyici karşılaştırılmadığına dair uyarı verir.
 
 ## Windows'ta günlük çalıştırma
 

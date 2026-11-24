@@ -49,7 +49,7 @@ The state file is written to `./data/balance-state.json` (override with `LLM_MON
 | `LLM_MONITOR_DATA_DIR` | Directory for `balance-state.json` (default `./data`). |
 | `MOONSHOT_BASE_URL` | Default `https://api.moonshot.ai` (international, USD). Use `https://api.moonshot.cn` for the China platform (CNY). The two platforms use different keys. |
 
-Thresholds are defined in `lib.ts` (`THRESHOLDS`): DeepSeek and Moonshot warn below 3 and are critical below 1 USD; OpenRouter warns below 5 and is critical below 1 USD. OpenRouter keys without a spending limit report "no fixed limit".
+Thresholds are defined in `lib.ts` (`THRESHOLDS`): DeepSeek and Moonshot warn below 3 and are critical below 1 USD; OpenRouter warns below 5 and is critical below 1 USD. OpenRouter keys without a spending limit report "no fixed limit". A balance in another currency (for example CNY on the China Moonshot platform) is not compared with these USD thresholds; the monitor reports a warning that it was not compared.
 
 ## Daily schedule on Windows
 

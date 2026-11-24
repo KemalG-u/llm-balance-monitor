@@ -30,10 +30,18 @@ export function classify(
   name: string,
   balance: number | undefined,
   thresholds: Record<string, Threshold> = THRESHOLDS,
+  currency?: string,
 ): { level: AlertLevel; msg: string } | null {
   if (balance == null) return null;
   const t = thresholds[name];
   if (!t) return null;
+  // A balance in another currency (e.g. CNY on the China Moonshot platform) must not be compared with USD thresholds.
+  if (currency && currency !== t.currency && balance >= 0) {
+    return {
+      level: "warning",
+      msg: `WARNING ${name}: balance is ${balance.toFixed(2)} ${currency} but the thresholds are in ${t.currency}; not compared`,
+    };
+  }
   if (balance < 0) return { level: "ok", msg: `${name}: no fixed limit (pay-as-you-go)` };
   if (balance < t.crit) {
     return { level: "critical", msg: `CRITICAL ${name}: ${balance.toFixed(2)} ${t.currency} (below ${t.crit})` };

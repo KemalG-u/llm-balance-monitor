@@ -31,6 +31,12 @@ test("classify thresholds", () => {
   assert.equal(classify("openrouter", -1)?.level, "ok");
   assert.equal(classify("unknown", 1), null);
   assert.equal(classify("deepseek", undefined), null);
+  // Currency-aware: a CNY balance is never compared with USD thresholds.
+  assert.equal(classify("moonshot", 100, undefined, "CNY")?.level, "warning");
+  assert.match(classify("moonshot", 100, undefined, "CNY")?.msg ?? "", /CNY.*not compared/);
+  assert.equal(classify("moonshot", 0.5, undefined, "CNY")?.level, "warning");
+  assert.equal(classify("moonshot", 0.5, undefined, "USD")?.level, "critical");
+  assert.equal(classify("moonshot", 10, undefined, undefined)?.level, "ok");
 });
 
 test("parseEnvText handles quotes, comments, CRLF", () => {

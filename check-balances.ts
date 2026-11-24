@@ -55,7 +55,7 @@ for (const [name, data] of Object.entries(providers)) {
     alerts.push({ provider: name, level: "error", msg: `${name}: could not read balance (${data.error})` });
     continue;
   }
-  const c = classify(name, data.balance);
+  const c = classify(name, data.balance, undefined, data.currency);
   if (c) {
     data.alertLevel = c.level;
     data.alertMsg = c.msg;
